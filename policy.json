@@ -1,0 +1,18 @@
+{
+  "company": "Arize Corp",
+  "flights": {
+    "economy_only_under_hours": 8,
+    "allowed_cabins_long_haul": ["economy", "premium_economy"],
+    "price_cap_usd": { "domestic": 800, "international": 1500 },
+    "prefer_nonstop_if_price_diff_under_usd": 150,
+    "min_advance_booking_days": 14
+  },
+  "hotels": {
+    "nightly_cap_usd": {
+      "New York": 350,
+      "London": 300,
+      "Lisbon": 200,
+      "default": 250
+    }
+  }
+}

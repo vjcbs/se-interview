@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arize Corp Travel Assistant</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1c2230; --muted: #6b7385;
+    --line: #e3e6ec; --accent: #3b5bdb; --accent-soft: #edf1ff;
+    --ok: #2b8a3e; --warn: #c92a2a; --user: #1c2230;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: var(--bg); color: var(--ink); height: 100vh; display: flex; flex-direction: column; }
+  header { background: var(--panel); border-bottom: 1px solid var(--line); padding: 14px 24px;
+           display: flex; align-items: center; justify-content: space-between; }
+  header h1 { font-size: 18px; margin: 0; }
+  header p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+  .header-actions { display: flex; gap: 8px; }
+  button.secondary, a.secondary { background: var(--panel); border: 1px solid var(--line); color: var(--ink);
+           padding: 8px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; text-decoration: none; }
+  button.secondary:hover, a.secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  main { flex: 1; display: grid; grid-template-columns: 1fr 300px; min-height: 0; }
+  .chat { display: flex; flex-direction: column; min-height: 0; }
+  #messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .msg { max-width: 75%; padding: 12px 16px; border-radius: 14px; line-height: 1.5; font-size: 14.5px; }
+  .msg.user { align-self: flex-end; background: var(--user); color: #fff; border-bottom-right-radius: 4px; white-space: pre-wrap; }
+  .msg.bot { align-self: flex-start; background: var(--panel); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .msg.bot h3 { font-size: 14.5px; margin: 10px 0 4px; }
+  .msg.bot ul, .msg.bot ol { margin: 4px 0; padding-left: 20px; }
+  .msg.bot p { margin: 4px 0; }
+  .msg.bot ul.sub { padding-left: 40px; margin-top: 0; }
+  .msg.error { border-color: var(--warn); color: var(--warn); }
+  .thinking { color: var(--muted); font-style: italic; }
+
+  .empty { margin: auto; text-align: center; color: var(--muted); max-width: 520px; }
+  .empty h2 { color: var(--ink); font-size: 20px; margin-bottom: 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
+  .chip { background: var(--accent-soft); color: var(--accent); border: 1px solid transparent; border-radius: 999px;
+          padding: 8px 14px; font-size: 13px; cursor: pointer; }
+  .chip:hover { border-color: var(--accent); }
+
+  form { display: flex; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--line); background: var(--panel); }
+  textarea { flex: 1; resize: none; border: 1px solid var(--line); border-radius: 10px; padding: 12px;
+             font: inherit; font-size: 14.5px; height: 48px; }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  button.send { background: var(--accent); color: #fff; border: 0; border-radius: 10px; padding: 0 20px;
+                font-size: 14px; cursor: pointer; }
+  button.send:disabled { opacity: .5; cursor: default; }
+
+  aside { background: var(--panel); border-left: 1px solid var(--line); padding: 20px; overflow-y: auto; font-size: 13.5px; }
+  aside h2 { font-size: 15px; margin: 0 0 4px; }
+  aside .sub { color: var(--muted); margin: 0 0 16px; }
+  aside h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 18px 0 8px; }
+  .rule { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--line); gap: 12px; }
+  .rule span:last-child { font-weight: 600; text-align: right; }
+  .session { margin-top: 20px; color: var(--muted); font-size: 12px; word-break: break-all; }
+
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } aside { display: none; } .msg { max-width: 90%; } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 id="title">Travel Assistant</h1>
+    <p>Find flights, hotels and things to do, within company policy.</p>
+  </div>
+  <div class="header-actions">
+    <a class="secondary" href="http://localhost:6006" target="_blank" rel="noopener">Open Phoenix ↗</a>
+    <button class="secondary" id="new-chat">New conversation</button>
+  </div>
+</header>
+
+<main>
+  <section class="chat">
+    <div id="messages"></div>
+    <form id="form">
+      <textarea id="input" placeholder="Where do you need to go?" autofocus></textarea>
+      <button class="send" id="send" type="submit">Send</button>
+    </form>
+  </section>
+
+  <aside>
+    <h2>Travel policy</h2>
+    <p class="sub" id="company">Loading…</p>
+    <h3>Flights</h3>
+    <div id="flight-rules"></div>
+    <h3>Hotel cap per night</h3>
+    <div id="hotel-rules"></div>
+    <div class="session">Session: <span id="session-id">new</span></div>
+  </aside>
+</main>
+
+<script>
+const EXAMPLES = [
+  "I need to fly from New York to Lisbon for a client meeting Dec 15-18. What are my options?",
+  "Can I fly business class from SFO to London on Dec 10?",
+  "What's my hotel budget in London, and which areas suit business travelers?",
+  "Things to do near Lisbon's business district in the evening",
+];
+
+const messagesEl = document.getElementById("messages");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+let sessionId = null;
+
+function escapeHtml(s) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Minimal markdown: headings, bold, bullet/numbered lists, paragraphs.
+function renderMarkdown(text) {
+  const lines = escapeHtml(text).split("\n");
+  let html = "", list = null;
+  const closeList = () => { if (list) { html += `</${list}>`; list = null; } };
+  for (const raw of lines) {
+    const line = raw.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    let m;
+    if ((m = line.match(/^#{1,6}\s+(.*)/))) { closeList(); html += `<h3>${m[1]}</h3>`; }
+    else if ((m = line.match(/^(\s*)[-*]\s+(.*)/))) {
+      if (list !== "ul") { closeList(); html += m[1].length ? '<ul class="sub">' : "<ul>"; list = "ul"; }
+      html += `<li>${m[2]}</li>`;
+    } else if ((m = line.match(/^\s*(\d+)\.\s+(.*)/))) {
+      // Keep the model's own numbering, even when bullets interrupt the numbered list
+      if (list !== "ol") { closeList(); html += `<ol start="${m[1]}">`; list = "ol"; }
+      html += `<li>${m[2]}</li>`;
+    } else if (line.trim() === "") { closeList(); }
+    else { closeList(); html += `<p>${line}</p>`; }
+  }
+  closeList();
+  return html;
+}
+
+function showEmptyState() {
+  messagesEl.innerHTML = `
+    <div class="empty">
+      <h2>Plan a business trip</h2>
+      <p>Ask for flights, hotels or things to do. Every recommendation is checked against company travel policy.</p>
+      <div class="chips">${EXAMPLES.map(e => `<button class="chip">${escapeHtml(e)}</button>`).join("")}</div>
+    </div>`;
+  messagesEl.querySelectorAll(".chip").forEach(c => c.onclick = () => send(c.textContent));
+}
+
+function addMessage(role, text, extraClass = "") {
+  const empty = messagesEl.querySelector(".empty");
+  if (empty) empty.remove();
+  const div = document.createElement("div");
+  div.className = `msg ${role} ${extraClass}`;
+  if (role === "bot" && !extraClass) div.innerHTML = renderMarkdown(text);
+  else div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+async function send(text) {
+  text = text.trim();
+  if (!text) return;
+  addMessage("user", text);
+  input.value = "";
+  sendBtn.disabled = true;
+  const thinking = addMessage("bot", "Checking flights and policy…", "thinking");
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: text, session_id: sessionId }),
+    });
+    if (!res.ok) throw new Error(`Server error ${res.status}`);
+    const data = await res.json();
+    sessionId = data.session_id;
+    document.getElementById("session-id").textContent = sessionId;
+    thinking.remove();
+    addMessage("bot", data.response);
+  } catch (err) {
+    thinking.remove();
+    addMessage("bot", `Something went wrong: ${err.message}. Check the server terminal.`, "error");
+  } finally {
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+form.onsubmit = e => { e.preventDefault(); send(input.value); };
+input.onkeydown = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(input.value); } };
+document.getElementById("new-chat").onclick = () => {
+  sessionId = null;
+  document.getElementById("session-id").textContent = "new";
+  showEmptyState();
+  input.focus();
+};
+
+async function loadPolicy() {
+  try {
+    const p = await (await fetch("/policy")).json();
+    const f = p.flights;
+    document.getElementById("title").textContent = `${p.company} Travel Assistant`;
+    document.getElementById("company").textContent = `${p.company} rules applied to every recommendation.`;
+    const row = (k, v) => `<div class="rule"><span>${k}</span><span>${v}</span></div>`;
+    document.getElementById("flight-rules").innerHTML =
+      row(`Under ${f.economy_only_under_hours}h`, "Economy only") +
+      row(`${f.economy_only_under_hours}h and over`, f.allowed_cabins_long_haul.map(c => c.replace("_", " ")).join(", ")) +
+      row("Domestic cap", `$${f.price_cap_usd.domestic.toLocaleString()}`) +
+      row("International cap", `$${f.price_cap_usd.international.toLocaleString()}`) +
+      row("Prefer nonstop if within", `$${f.prefer_nonstop_if_price_diff_under_usd}`) +
+      row("Book ahead", `${f.min_advance_booking_days} days`);
+    document.getElementById("hotel-rules").innerHTML = Object.entries(p.hotels.nightly_cap_usd)
+      .map(([city, cap]) => row(city === "default" ? "Other cities" : city, `$${cap}`)).join("");
+  } catch {
+    document.getElementById("company").textContent = "Could not load policy.";
+  }
+}
+
+showEmptyState();
+loadPolicy();
+</script>
+</body>
+</html>

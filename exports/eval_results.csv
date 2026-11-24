@@ -1,0 +1,264 @@
+span_id,conversation,user_message,agent_response,tools_used,tool_results,session_id,start_time,frustration_label,frustration_explanation,frustration_cause,policy_faithfulness
+d09d830ee54c29d0,(start of conversation),I need to fly from New York to Lisbon for a client meeting Dec 15-18. What are my options?,"Here are your flight options from New York (JFK) to Lisbon (LIS) for your client meeting from December 15 to December 18:
+
+### Flight Options:
+1. **United Airlines (UA1422)**
+   - **Price:** $762.24
+   - **Duration:** 11 hours 12 minutes
+   - **Stops:** 2
+   - **Compliance:** Compliant (Cheapest option)
+
+2. **Lufthansa (LH4318)**
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+   - **Compliance:** Compliant
+
+3. **American Airlines (AA2856)**
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (Non-stop)
+   - **Compliance:** Compliant
+
+4. **Lufthansa (LH7470)**
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+   - **Compliance:** Compliant
+
+### Recommendation:
+- I recommend the **United Airlines (UA1422)** flight as it is the cheapest compliant option. 
+
+Let me know if you need assistance with hotel bookings or anything else!","search_flights, check_flight_policy","{""company"": ""Arize Corp"", ""verdicts"": [{""flight_number"": ""UA1422"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH4318"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""AA2856"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH7470"", ""compliant"": true, ""violations"": []}], ""recommended_flight"": ""UA1422"", ""recommendation_reason"": ""Cheapest compliant option.""}",8d2c0a20-86bf-4a2f-8cd3-f018b69e5ed3,2026-11-21 04:30:34.518713+00:00,no_friction,"The user is simply making a request for information, asking the assistant to provide flight options for a trip from New York to Lisbon. There is no indication of dissatisfaction, correction, retry, or challenge in the message. Therefore, it does not express any friction with the assistant's previous behavior.",,faithful
+b2b38f99919c3f3a,(start of conversation),I need to fly from New York to Lisbon for a client meeting Dec 15-18. What are my options?,"Here are your flight options from New York (JFK) to Lisbon (LIS) for your client meeting from December 15 to December 18:
+
+### Flight Options:
+1. **United Airlines UA1422**
+   - **Price:** $762.24
+   - **Duration:** 11 hours 12 minutes
+   - **Stops:** 2
+   - **Compliance:** Compliant (Recommended as the cheapest option)
+
+2. **Lufthansa LH4318**
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+   - **Compliance:** Compliant
+
+3. **American Airlines AA2856**
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (Non-stop)
+   - **Compliance:** Compliant
+
+4. **Lufthansa LH7470**
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+   - **Compliance:** Compliant
+
+### Recommendation:
+- I recommend **United Airlines UA1422** as it is the cheapest compliant option. 
+
+Let me know if you need assistance with hotel bookings or anything else!","search_flights, check_flight_policy","{""company"": ""Arize Corp"", ""verdicts"": [{""flight_number"": ""UA1422"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH4318"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""AA2856"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH7470"", ""compliant"": true, ""violations"": []}], ""recommended_flight"": ""UA1422"", ""recommendation_reason"": ""Cheapest compliant option.""}",bb6626d4-cb59-4741-87d3-8c0520ac5e75,2026-11-22 23:28:21.624543+00:00,no_friction,"The user's message is a straightforward request for information about flights from New York to Lisbon for a specific date range. There is no indication of dissatisfaction, correction, retry, frustration, or challenge regarding the AI assistant's preceding behavior. The message is an initial task request without any context of previous interaction.",,faithful
+90002e069d63475c,(start of conversation),"What's my hotel budget in London, and which neighborhoods are good for business travelers?","Your hotel budget in London is **$300 per night**.
+
+### Recommended Neighborhoods for Business Travelers:
+- **Soho**: Known for its vibrant atmosphere and excellent dining options.
+- **Mayfair**: Offers luxurious accommodations and is close to many business hubs.
+- **The City (Square Mile)**: Ideal for business travelers, with a mix of modern architecture and historical sites.
+
+These neighborhoods provide good access to business facilities and amenities.","check_hotel_policy, duckduckgo_search","{""company"": ""Arize Corp"", ""city"": ""London"", ""nightly_cap_usd"": 300.0, ""compliant"": true, ""violations"": []}",f220a003-4df4-45fa-98c7-d63d11eb3a2e,2026-11-22 23:28:32.762263+00:00,no_friction,"The user asks for information about their hotel budget and neighborhoods suitable for business travelers in London, but there is no previous interaction from the assistant to indicate dissatisfaction or correction. The user is simply requesting new information, not responding to a perceived error or issue.",,faithful
+ebedb477d6ce1a70,(start of conversation),What are some good things to do near Lisbon's business district in the evening?,"Here are some great evening activities near Lisbon's business district:
+
+- **Fado Music**: Experience traditional Portuguese music in local taverns, especially in the Alfama district.
+- **Rooftop Bars**: Enjoy stunning views of the city at rooftop bars like Park Bar or Sky Bar.
+- **Dining**: Explore local cuisine at restaurants offering dishes like bacalhau (cod) and pastéis de nata (custard tarts).
+- **Night Walks**: Stroll through the historic neighborhoods of Chiado and Bairro Alto, known for their vibrant nightlife.
+- **Cultural Events**: Check for any live performances or exhibitions at venues like the Gulbenkian Foundation.
+
+These activities provide a mix of culture, dining, and entertainment to enjoy your evening in Lisbon!",duckduckgo_search,,20a35939-5ca0-450e-aac4-316ac1cee668,2026-11-22 23:28:38.495520+00:00,no_friction,The user is asking for activities near Lisbon's business district in the evening but has not referenced any previous interaction with the assistant. There's no indication of dissatisfaction or correction of prior suggestions.,,
+7d86682944b17e0f,(start of conversation),Book me business class from SFO to London on Dec 10.,Could you please provide the return date for your trip?,,,4b2d31f6-0bd7-48bc-9885-3cc4bc380a3d,2026-11-22 23:28:43.920691+00:00,no_friction,"The latest user message contains a request without any indication of dissatisfaction, correction, or challenge to a previous action by the assistant. There is no expression of frustration or an attempt to retry a previous unsatisfactory request. It appears to be a straightforward command without referencing any preceding action that might have been incorrect or incomplete by the assistant.",,
+950dedd4778241f6,(start of conversation),I need a flight from JFK to Chicago on Nov 27.,"Unfortunately, there are no compliant flight options available for your trip from JFK to Chicago on November 27. All options violate the advance booking policy, which requires flights to be booked at least 14 days in advance.
+
+Please consider rescheduling your trip to allow for compliant booking, or let me know if you need assistance with alternative travel arrangements.","search_flights, check_flight_policy","{""company"": ""Arize Corp"", ""verdicts"": [{""flight_number"": ""TP7341"", ""compliant"": false, ""violations"": [{""rule"": ""advance_booking"", ""detail"": ""Departure is only 5 days away; policy requires booking at least 14 days ahead.""}]}, {""flight_number"": ""TP2831"", ""compliant"": false, ""violations"": [{""rule"": ""advance_booking"", ""detail"": ""Departure is only 5 days away; policy requires booking at least 14 days ahead.""}]}, {""flight_number"": ""LH6801"", ""compliant"": false, ""violations"": [{""rule"": ""advance_booking"", ""detail"": ""Departure is only 5 days away; policy requires booking at least 14 days ahead.""}]}, {""flight_number"": ""AA4458"", ""compliant"": false, ""violations"": [{""rule"": ""advance_booking"", ""detail"": ""Departure is only 5 days away; policy requires booking at least 14 days ahead.""}]}], ""recommended_flight"": null, ""recommendation_reason"": ""No option complies with policy.""}",8cf26005-75c4-4263-85f7-e9f349c0e361,2026-11-22 23:28:44.637821+00:00,no_friction,"The latest user message contains a straightforward request for a flight booking without any indication of negative affect or dissatisfaction. There's no evidence of correcting, retrying, expressing frustration, or challenging any of the assistant's previous actions. Since this message appears to be the user's initial task query, there is no preceding assistant behavior to react to negatively.",,faithful
+e75c08ecbd405113,(start of conversation),Is a $260 per night hotel in Lisbon OK?,"A $260 per night hotel in Lisbon is **not compliant** with Arize Corp's travel policy. 
+
+- **Violation**: The nightly rate exceeds the cap of **$200** for Lisbon. 
+
+You will need to find a hotel that is $200 or less per night. Would you like help finding compliant hotel options?",check_hotel_policy,"{""company"": ""Arize Corp"", ""city"": ""Lisbon"", ""nightly_cap_usd"": 200.0, ""compliant"": false, ""violations"": [{""rule"": ""hotel_nightly_cap"", ""detail"": ""$260/night exceeds the Lisbon cap of $200.""}]}",515a6dbc-f4f5-46b5-bb3c-2a8605114332,2026-11-22 23:28:50.375372+00:00,no_friction,"The user's message is a simple request for confirmation regarding a specific hotel option. It doesn't address any preceding behavior from the assistant nor indicate any dissatisfaction or misunderstanding. There are no signals of correction, retry, frustration, or challenge.",,faithful
+d268ddb92789a649,(start of conversation),Find me flights from JFK to JFK tomorrow.,"It seems like you are looking for flights from JFK to JFK, which is not a valid route. Could you please provide a different destination or clarify your travel plans?",,,0abfcf68-4aa4-4d03-97b6-5b577c3d55c7,2026-11-22 23:28:53.035119+00:00,no_friction,"The user presents a request to find flights from JFK to JFK. There is no indication from the message that it is a reaction to any previous (and errant) assistant behavior, such as misunderstanding or failing to follow previous instructions. This is the user's first message, and it doesn't correct or challenge any prior output from the assistant. Thus, there is no expression of dissatisfaction or corrective action involved.",,
+61afeb64f5081579,(start of conversation),Find me a flight to Tokyo.,"Could you please provide me with the following details to assist you better?
+
+- Your departure city (or airport)
+- Departure date
+- Return date (if applicable)
+- Number of adult passengers
+- Preferred cabin class (economy, premium economy, business, first)",,,6a9ff896-07c8-4de9-b230-c976fc76eb03,2026-11-22 23:28:54.468439+00:00,no_friction,"The user message is a straightforward request for assistance, without any indication of dissatisfaction with a prior interaction. There are no signals of correction, retry, frustration, or challenge in the user's message.",,
+bd1d001b823350fc,(start of conversation),"Flights from NYC to Lisbon, Dec 15-18.","Here are the flight options from NYC (JFK) to Lisbon (LIS) for December 15-18:
+
+### Recommended Flight
+- **Airline:** United
+- **Flight Number:** UA1422
+- **Price:** $762.24
+- **Duration:** 11 hours 12 minutes
+- **Stops:** 2
+
+### Other Compliant Options
+1. **Airline:** Lufthansa
+   - **Flight Number:** LH4318
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+
+2. **Airline:** American Airlines
+   - **Flight Number:** AA2856
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (nonstop)
+
+3. **Airline:** Lufthansa
+   - **Flight Number:** LH7470
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+
+All options comply with Arize Corp's travel policy. Would you like to proceed with booking the recommended flight or need more information?","search_flights, check_flight_policy","{""company"": ""Arize Corp"", ""verdicts"": [{""flight_number"": ""UA1422"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH4318"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""AA2856"", ""compliant"": true, ""violations"": []}, {""flight_number"": ""LH7470"", ""compliant"": true, ""violations"": []}], ""recommended_flight"": ""UA1422"", ""recommendation_reason"": ""Cheapest compliant option.""}",51141290-935b-4789-b8fe-54fe7273f70e,2026-11-22 23:28:55.692069+00:00,no_friction,"The user's message is a straightforward request for flight information without any indication of dissatisfaction with previous assistance or behavior from the AI. There is no correction, retry, frustration, or challenge directed at the assistant, as there is no preceding behavior from the assistant to react to. This is a typical starting query.",,faithful
+edd2e51792cd02ff,"User: Flights from NYC to Lisbon, Dec 15-18.
+
+Assistant: Here are the flight options from NYC (JFK) to Lisbon (LIS) for December 15-18:
+
+### Recommended Flight
+- **Airline:** United
+- **Flight Number:** UA1422
+- **Price:** $762.24
+- **Duration:** 11 hours 12 minutes
+- **Stops:** 2
+
+### Other Compliant Options
+1. **Airline:** Lufthansa
+   - **Flight Number:** LH4318
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+
+2. **Airline:** American Airlines
+   - **Flight Number:** AA2856
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (nonstop)
+
+3. **Airline:** Lufthansa
+   - **Flight Number:** LH7470
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+
+All options comply with Arize Corp's travel policy. Would you like to proceed with booking the recommended flight or need more information?",Two stops and 11 hours? That's ridiculous for a client meeting. Give me the nonstop.,"The nonstop flight option is as follows:
+
+### Nonstop Flight
+- **Airline:** American Airlines
+- **Flight Number:** AA2856
+- **Price:** $985.61
+- **Duration:** 6 hours 58 minutes
+- **Stops:** 0 (nonstop)
+
+This flight is compliant with Arize Corp's travel policy. Would you like to proceed with booking this flight?",,,51141290-935b-4789-b8fe-54fe7273f70e,2026-11-22 23:29:04.948779+00:00,friction,"The user expresses dissatisfaction with the assistant's recommended flight option due to its long duration and multiple stops. The user directly challenges the assistant's choice by stating it is ""ridiculous"" for their purpose and requests a different option (the nonstop flight). This is a clear correction and challenge to the assistant's initial recommendation.",policy_or_design,
+c557c58a55c475b7,"User: Flights from NYC to Lisbon, Dec 15-18.
+
+Assistant: Here are the flight options from NYC (JFK) to Lisbon (LIS) for December 15-18:
+
+### Recommended Flight
+- **Airline:** United
+- **Flight Number:** UA1422
+- **Price:** $762.24
+- **Duration:** 11 hours 12 minutes
+- **Stops:** 2
+
+### Other Compliant Options
+1. **Airline:** Lufthansa
+   - **Flight Number:** LH4318
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+
+2. **Airline:** American Airlines
+   - **Flight Number:** AA2856
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (nonstop)
+
+3. **Airline:** Lufthansa
+   - **Flight Number:** LH7470
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+
+All options comply with Arize Corp's travel policy. Would you like to proceed with booking the recommended flight or need more information?
+
+User: Two stops and 11 hours? That's ridiculous for a client meeting. Give me the nonstop.
+
+Assistant: The nonstop flight option is as follows:
+
+### Nonstop Flight
+- **Airline:** American Airlines
+- **Flight Number:** AA2856
+- **Price:** $985.61
+- **Duration:** 6 hours 58 minutes
+- **Stops:** 0 (nonstop)
+
+This flight is compliant with Arize Corp's travel policy. Would you like to proceed with booking this flight?",I already said nonstop. Why do you keep recommending the United flight?,"I apologize for the confusion. The United flight was highlighted as the cheapest option, but I understand you're looking for the nonstop flight. 
+
+The nonstop flight with American Airlines is compliant and is the best option for your needs. Would you like to proceed with booking this flight?",,,51141290-935b-4789-b8fe-54fe7273f70e,2026-11-22 23:29:06.952676+00:00,friction,"The user expresses frustration and challenges the assistant's previous recommendation. The user had already indicated a preference for a nonstop flight, but the assistant initially presented a different option. The user's question 'Why do you keep recommending the United flight?' implies dissatisfaction with the repeated recommendation of an option they find unsuitable. This meets the criteria for friction, as it involves a challenge to the assistant’s previous actions and a show of frustration.",agent_error,
+d757e8d6a8052059,"User: Flights from NYC to Lisbon, Dec 15-18.
+
+Assistant: Here are the flight options from NYC (JFK) to Lisbon (LIS) for December 15-18:
+
+### Recommended Flight
+- **Airline:** United
+- **Flight Number:** UA1422
+- **Price:** $762.24
+- **Duration:** 11 hours 12 minutes
+- **Stops:** 2
+
+### Other Compliant Options
+1. **Airline:** Lufthansa
+   - **Flight Number:** LH4318
+   - **Price:** $915.95
+   - **Duration:** 9 hours 13 minutes
+   - **Stops:** 1
+
+2. **Airline:** American Airlines
+   - **Flight Number:** AA2856
+   - **Price:** $985.61
+   - **Duration:** 6 hours 58 minutes
+   - **Stops:** 0 (nonstop)
+
+3. **Airline:** Lufthansa
+   - **Flight Number:** LH7470
+   - **Price:** $1000.03
+   - **Duration:** 9 hours 6 minutes
+   - **Stops:** 1
+
+All options comply with Arize Corp's travel policy. Would you like to proceed with booking the recommended flight or need more information?
+
+User: Two stops and 11 hours? That's ridiculous for a client meeting. Give me the nonstop.
+
+Assistant: The nonstop flight option is as follows:
+
+### Nonstop Flight
+- **Airline:** American Airlines
+- **Flight Number:** AA2856
+- **Price:** $985.61
+- **Duration:** 6 hours 58 minutes
+- **Stops:** 0 (nonstop)
+
+This flight is compliant with Arize Corp's travel policy. Would you like to proceed with booking this flight?
+
+User: I already said nonstop. Why do you keep recommending the United flight?
+
+Assistant: I apologize for the confusion. The United flight was highlighted as the cheapest option, but I understand you're looking for the nonstop flight. 
+
+The nonstop flight with American Airlines is compliant and is the best option for your needs. Would you like to proceed with booking this flight?",Forget it. Just tell me if premium economy on the nonstop is allowed.,"Premium economy on the nonstop flight (American Airlines, Flight AA2856) is **not allowed** under Arize Corp's travel policy. The policy states that premium economy is only permitted for trips under 8 hours, and this flight exceeds that duration.
+
+You would need to book the flight in economy class to comply with the policy. Would you like assistance with anything else?",check_flight_policy,"{""company"": ""Arize Corp"", ""verdicts"": [{""flight_number"": ""AA2856"", ""compliant"": false, ""violations"": [{""rule"": ""cabin_class"", ""detail"": ""premium_economy not allowed: trip is 7.0h, economy only under 8h.""}]}], ""recommended_flight"": null, ""recommendation_reason"": ""No option complies with policy.""}",51141290-935b-4789-b8fe-54fe7273f70e,2026-11-22 23:29:08.287604+00:00,no_friction,"The latest user message expresses a clear withdrawal from the original task with a hint of dissatisfaction about the assistant's previous recommendations, particularly the insistence on the United flight despite the user's initial clear request for a nonstop option. However, the latest demand doesn't directly correct or retry the assistant's prior response but instead shifts the request towards checking if premium economy is allowed. This request for information about whether premium economy is allowed doesn't express explicit friction with the assistant's prior actions, especially since the previous challenge was already addressed by the assistant.",,faithful
