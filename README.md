@@ -1,89 +1,43 @@
-# LangGraph Agent with Web Search
+# Arize Corp Travel Assistant
 
-A simple LangGraph agent that can search the web using DuckDuckGo, exposed via a FastAPI server.
-
-## Prerequisites
-
-- Python 3.11+
-- [Poetry](https://python-poetry.org/docs/#installation)
-- OpenAI API key
+A policy-aware travel agent built with LangGraph. It helps employees find flights, hotels and things to do and only recommends options that comply with company travel policy. The agent is traced with Arize Phoenix and evaluated for user frustration.
 
 ## Setup
 
-1. Install dependencies:
+Requires Python 3.11+, Poetry and an OpenAI API key.
 
 ```bash
 poetry install
+cp .env.example .env          # add your OPENAI_API_KEY
+pipx install --python python3.12 arize-phoenix
 ```
 
-2. Create a `.env` file from the example:
+## Run
 
 ```bash
-cp .env.example .env
+phoenix serve                                  # Phoenix UI: http://localhost:6006
+poetry run uvicorn api:app --reload            # Chat UI: http://localhost:8000
 ```
 
-3. Add your OpenAI API key to the `.env` file:
-
-```
-OPENAI_API_KEY=your_actual_api_key
-```
-
-## Running the API
-
-Start the FastAPI server:
+Scripts (with both running):
 
 ```bash
-poetry run uvicorn api:app --reload
+poetry run python scripts/run_queries.py       # send test queries
+poetry run python scripts/export_spans.py      # export spans to exports/
+poetry run python scripts/run_evals.py         # run evals and create the frustrated-interactions dataset
 ```
 
-The API will be available at `http://localhost:8000`.
+## Files
 
-## API Endpoints
-
-### POST /chat
-
-Send a message to the agent and receive a response.
-
-**Request:**
-
-```bash
-curl -X POST http://localhost:8000/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "What is the latest news about AI?"}'
-```
-
-**Response:**
-
-```json
-{
-  "response": "Based on my search, here are the latest developments in AI..."
-}
-```
-
-### GET /health
-
-Health check endpoint.
-
-```bash
-curl http://localhost:8000/health
-```
-
-
-## Project Structure
-
-```
-se-interview/
-├── pyproject.toml   # Poetry dependencies
-├── .env.example     # Environment variable template
-├── README.md        # This file
-├── agent.py         # LangGraph agent implementation
-└── api.py           # FastAPI server
-```
-
-## How It Works
-
-1. The agent receives a user message via the `/chat` endpoint
-2. It calls GPT-4o with the message and available tools (DuckDuckGo search)
-3. If the LLM decides to search, it executes the search and feeds results back
-4. The loop continues until the LLM provides a final response
-5. The response is returned to the user
+| File | Description |
+|---|---|
+| `agent.py` | LangGraph agent: LLM ⇄ tools loop, system prompt, conversation memory |
+| `api.py` | FastAPI app: `/chat` endpoint, chat UI, Phoenix tracing |
+| `flight_tool.py` | `search_flights` tool: structured flight options (mock data) |
+| `policy_tool.py` | `check_flight_policy` and `check_hotel_policy` tools |
+| `policy.json` | Company travel policy rules |
+| `static/index.html` | Chat UI |
+| `scripts/run_queries.py` | Sends test conversations to the agent |
+| `scripts/export_spans.py` | Exports all spans from Phoenix |
+| `scripts/run_evals.py` | User frustration and policy evals; logs results to Phoenix and creates a dataset |
+| `exports/` | Exported spans and eval results |
